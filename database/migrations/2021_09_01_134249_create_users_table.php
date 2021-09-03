@@ -19,11 +19,12 @@ class CreateUsersTable extends Migration
             $table->string('firstname');
             $table->string('lastname');
             $table->string('password');
+            $table->boolean('admin');
             $table->string('email')->unique();
             $table->timestamps();
         });
     }
-
+    
     /**
      * Reverse the migrations.
      *
