@@ -26,25 +26,28 @@ require __DIR__.'/auth.php';
 
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/admin/operations', function(){
-        return view('users.admin')->name('adminOperations');
-    });
     
-        Route::get('admin/search', function(){
-            return view('users.search');
-        })->name('admin.search');
-        
-        Route::get('admin/show', function(){
-            return view('users.showUsers');
+    Route::middleware(['can:accessAdminpanel'])->group(function() { 
+        Route::get('/admin/operations', function(){
+            return view('users.admin')->name('adminOperations');
+        });
             
-        })->name('admin.showUsers');
-
-        Route::get('admin/showAllUsers', 'App\Http\Controllers\Admin\UserController@showAllUsers')->name('admin.showAllUsers');
-          
-        
-        Route::post('admin/search', 'App\Http\Controllers\Admin\UserController@search')->name('admin.handleSearch');
-    
-    Route::resource('admin', 'App\Http\Controllers\Admin\UserController');
+            Route::get('admin/search', function(){
+                return view('users.search');
+            })->name('admin.search');
+            
+            Route::get('admin/show', function(){
+                return view('users.showUsers');
+                
+            })->name('admin.showUsers');
+            
+            Route::get('admin/showAllUsers', 'App\Http\Controllers\Admin\UserController@showAllUsers')->name('admin.showAllUsers');
+            
+            
+            Route::post('admin/search', 'App\Http\Controllers\Admin\UserController@search')->name('admin.handleSearch');
+            
+            Route::resource('admin', 'App\Http\Controllers\Admin\UserController');
+    });       
 });
 
 /*

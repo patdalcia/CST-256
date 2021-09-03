@@ -23,6 +23,7 @@ class User extends Authenticatable
         'lastname',
         'email',
         'password',
+        'admin'
     ];
 
     /**
@@ -43,4 +44,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    /**
+     * checks if the user belongs to a particular group
+     * @param string|array $role
+     * @return bool
+     */
+    public function role($role) {
+        $role = (array)$role;
+        if($this->admin > 0){
+            $r = "admin";
+        }
+        else{
+            $r = "member";
+        }
+        return in_array($r, $role);
+    }
 }
