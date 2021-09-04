@@ -2,40 +2,36 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+class UserDemographic extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable;
-
+    use HasFactory;
+    
     /**
      * The attributes that are mass assignable.
      *
      * @var string[]
      */
     protected $fillable = [
-        'username',
-        'firstname',
-        'lastname',
-        'email',
-        'password',
-        'admin'
+        'gender',
+        'age',
+        'education',
+        'interests',
+        'country',
+        'user_id'
     ];
-
+    
     /**
      * The attributes that should be hidden for serialization.
      *
      * @var array
      */
     protected $hidden = [
-        'password',
-        'remember_token',
+        
     ];
-
+    
     /**
      * The attributes that should be cast.
      *
@@ -49,7 +45,7 @@ class User extends Authenticatable
      * checks if the user belongs to a particular group
      * @param string|array $role
      * @return bool
-     */
+     
     public function role($role) {
         $role = (array)$role;
         if($this->admin > 0){
@@ -60,12 +56,13 @@ class User extends Authenticatable
         }
         return in_array($r, $role);
     }
+    */
     
     /**
-     * Get the Demographics associated with the user.
+     * Get the user that owns the demographic.
      */
-    public function userDemographic()
+    public function user()
     {
-        return $this->hasOne(UserDemographic::class);
+        return $this->belongsTo(User::class);
     }
 }

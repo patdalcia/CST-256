@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Auth;
 //Retrieving currently logged in user
 $user = Auth::user();
 ?>
-@section('title', 'Dashboard')
+@section('title', 'Create Post')
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" ></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js" ></script>
@@ -12,7 +12,7 @@ $user = Auth::user();
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-           {{ $user->username }}'s {{ __('Home Page') }}
+           {{ "Create A New Post" }}
         </h2>
     </x-slot>    		
 
@@ -34,17 +34,19 @@ $user = Auth::user();
                 <div class="p-6 bg-white border-b border-gray-200">        
                              	
                 
-                 Welcome {{ $user->firstname }} {{$user->lastname }}, you're logged in!
+                 Welcome {{ Auth::user()->firstname }} {{ Auth::user()->lastname }}
                  <br><br>
                  This page is a work in progress, check back soon!<br><br>
                  
-                 @if(Auth::user()->admin > 0)
-                 You have Admin Permissions! Click the Admin Link above for basic CRUD operations. 
-                 @else
-                 You have Normal User Permissions! Click the User Link above for basic user operations.
-                 @endif
-                                              
-                </div>
+                 The CREATION, MODIFICATION, and DELETION of posts has not been implemented yet!
+                               
+                 <div class="flex items-center justify-end mt-4">
+            		<a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ url()->previous() }}">
+                    	{{ __('Go Back?') }}
+                	</a>
+            	</div>
+                                 
+                </div>               
             </div>
         </div>
     </div>

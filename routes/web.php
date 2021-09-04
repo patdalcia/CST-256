@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use PHPUnit\TextUI\XmlConfiguration\Group;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,15 +18,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+/*
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+*/
 
 require __DIR__.'/auth.php';
 
 
 
 Route::middleware(['auth'])->group(function () {
+    
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
     
     Route::middleware(['can:accessAdminpanel'])->group(function() { 
         Route::get('/admin/operations', function(){
@@ -47,7 +54,15 @@ Route::middleware(['auth'])->group(function () {
             Route::post('admin/search', 'App\Http\Controllers\Admin\UserController@search')->name('admin.handleSearch');
             
             Route::resource('admin', 'App\Http\Controllers\Admin\UserController');
-    });       
+        });       
+    
+        Route::middleware(['can:accessProfile'])->group(function() {
+            
+            Route::resource('user', 'App\Http\Controllers\User\UserController');
+            
+            Route::get('user/showAllPosts', 'App\Http\Controllers\User\UserController@showAllPosts')->name('user.showAllPosts');
+                        
+        });
 });
 
 /*

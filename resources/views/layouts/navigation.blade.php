@@ -24,7 +24,11 @@
                     </x-nav-link>
                 </div>
                  @elseif( Auth::user()->admin == 0)
-                 {{ "User is Not Admin" }}
+                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
+                        {{ __('User Portal') }}
+                    </x-nav-link>
+                </div>
                  @endif
                 
                 
@@ -49,6 +53,7 @@
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
+                            
 
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
