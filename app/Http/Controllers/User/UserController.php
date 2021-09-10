@@ -13,6 +13,9 @@ use Illuminate\Auth\Events\Registered;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Session;
 use App\Models\UserDemographic;
+use App\Models\UserPortfolio;
+
+use function PHPUnit\Framework\isNull;
 
 class UserController extends Controller
 {
@@ -68,7 +71,8 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $demographics = User::find($id)->userDemographic;
-        
+        $portfolio = User::find($id)->userPortfolio;
+
         if(is_null($demographics)){
             $demographics = new \stdClass();
             $demographics->gender = " ";
@@ -77,8 +81,14 @@ class UserController extends Controller
             $demographics->interests = " ";
             $demographics->country = " ";
         }
-        
-        return view('users.userPortal.edit')->with('user', $user)->with('demographics', $demographics);
+
+
+        // attempting to chain with(), if this doesn't work then refactor 
+        // compact() to pass several vars as an array
+        return view('users.userPortal.edit')->with('user', $user)
+            ->with('demographics', $demographics)
+            ->with('portfolio', $portfolio);
+        // return view('users.userPortal.edit')->with('user', $user)->with('demographics', $demographics);
     }
 
     /**
@@ -92,7 +102,8 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $demographics = User::findOrFail($id)->userDemographic;
-        
+        $portfolio = User::findOrFail($id)->userPortfolio;
+
         
         
         $request->validate([
@@ -106,6 +117,7 @@ class UserController extends Controller
             'education' => 'required|string|max:100',
             'interests' => 'required|string|max:100',
             'country' => 'required|string|max:100',
+            // TODO: add validation rules to portfolio fields
         ]);
         
         // Fill user model
@@ -138,11 +150,31 @@ class UserController extends Controller
             ]);
         }        
         
+        if(is_null($portfolio)){
+            // Fill portfolio model
+            $portfolio = new UserPortfolio();
+            $portfolio->user_id = $user->id;
+            $portfolio->job = $request->job;
+            $portfolio->skills = $request->skills;
+            $portfolio->professionaleducation = $request->professionaleducation;
+        } 
+        else {
+            // Fill portfolio model from page
+            $portfolio->fill([
+                'job' => $request->job,
+                'skills' => $request->skills,
+                'professionaleducation' => $request->professionaleducation,
+            ]);
+        }
+
         // Save user to database
         $user->save();
         
         // Save demographics to database
         $demographics->save();
+
+        // Save portfolio to database
+        $portfolio->save();
         
         return redirect()->route( 'user.index' )->with('status', 'Your information Has Been Updated Successfully!');
     }

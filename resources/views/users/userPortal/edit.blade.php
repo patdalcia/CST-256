@@ -108,6 +108,30 @@
                 <x-input id="country" class="block mt-1 w-full" type="text" name="country" :value="$demographics->country" required autofocus/>
             </div>
 
+            {{-- Job section for Users to manage --}}
+            <h1><strong>Edit Member E-Portfolio</strong></h1>
+
+            {{-- Job --}}
+            <div class="mt-4">
+                <x-label for="job" :value="__('Current Job')" />
+
+                <x-input id="job" class="block mt-1 w-full" type="text" name="job" :value="$portfolio->job" required autofocus/>
+            </div>
+
+            {{-- Skills --}}
+            <div class="mt-4">
+                <x-label for="skills" :value="__('Professional Skills')" />
+
+                <x-input id="skills" class="block mt-1 w-full" type="text" name="skills" :value="$portfolio->skills" required autofocus/>
+            </div>
+
+            {{-- Professional Education --}}
+            <div class="mt-4">
+                <x-label for="professionaleducation" :value="__('Professional Education')" />
+
+                <x-input id="professionaleducation" class="block mt-1 w-full" type="text" name="professionaleducation" :value="$portfolio->professionaleducation" required autofocus/>
+            </div>
+
 			<!-- Submit button and links -->
             <div class="flex items-center justify-end mt-4">
                 <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ url()->previous() }}">

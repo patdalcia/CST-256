@@ -68,4 +68,13 @@ class User extends Authenticatable
     {
         return $this->hasOne(UserDemographic::class);
     }
+
+    /**
+     * Get the Portfolio associated with the user
+     * 
+     * @return UserPortfolio
+     */
+    public function userPortfolio(){
+        return $this->hasOne(UserPortfolio::class);
+    }
 }

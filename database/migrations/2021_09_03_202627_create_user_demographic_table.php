@@ -20,11 +20,15 @@ class CreateUserDemographicTable extends Migration
             $table->string('education', 100);
             $table->string('interests', 100);
             $table->string('country', 100);
-            $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
+            // $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
-
+    /**
+     * !!! I ran into an issue where this migration would create a "user_demographic" table, when the "user_demographics" (s) 
+     * table was already in use. That one seemed to migrate fine when I cloned the repo, this one did not.
+     */
+    
     /**
      * Reverse the migrations.
      *
