@@ -111,6 +111,37 @@ $destroyPath2 = "request()->routeIs('admin.create', '" . Auth::user()->id . "')"
             </div>
         
         </div>
+        
+        <!-- Edit User Information section -->
+        <div>
+        <br>
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+           {{ "Edit Groups" }}
+        </h2>
+        <br>
+        
+        	<!-- Create Group Link -->   
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200">       
+                	<div align="center">
+                		<x-responsive-nav-link :href="route('group.create')" :active="request()->routeIs('group.create')">
+                			{{ __('Create New Group') }}
+            			</x-responsive-nav-link>
+                	</div>                 
+                </div>
+            </div>
+            <!-- Show All Groups Link -->   
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200">       
+                	<div align="center">
+                		<x-responsive-nav-link :href="route('group.showAllGroups')" :active="request()->routeIs('group.showAllGroups')">
+                			{{ __('Show All Groups') }}
+            			</x-responsive-nav-link>
+                	</div>                 
+                </div>
+            </div>
+        
+        </div>
             
             
         </div>
