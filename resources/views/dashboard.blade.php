@@ -16,36 +16,67 @@ $user = Auth::user();
         </h2>
     </x-slot>    		
 
-    <div class="py-12">  	
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">  
+<div class="py-12">  	
         
-        <!-- Status Alerts Section -->  
-        @if (session('status'))  
-    			<div class="alert alert-success alert-dismissible fade show" align="center" role="alert">
-  					<strong>{{ session('status') }}</strong>
-  					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    					<span aria-hidden="true">&times;</span>
-  					</button>
-  					<br><br>
-				</div>
-		@endif	 
+	<div class="d-flex h-md-100 justify-content-around">
+		<div class="d-md-flex align-items-center h-100 p-5 text-center justify-content-center">
+			<div class="mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+				Welcome {{ $user->firstname }} {{ $user->lastname }}, you're logged in!
+				<br><br>
+				This page is a work in progress, check back soon!<br><br>
+				
+				@if(Auth::user()->admin > 0)
+				You Have Admin Permissions! Click the Admin Link above for CRUD Operations.
+				@else
+				You Have Normal User Permissions! Click the User Link above for User Operations.
+				@endif
+			</div>		
+		</div>
 		
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">                   
-                <div class="p-6 bg-white border-b border-gray-200">        
-                             	
-                
-                 Welcome {{ $user->firstname }} {{$user->lastname }}, you're logged in!
-                 <br><br>
-                 This page is a work in progress, check back soon!<br><br>
-                 
-                 @if(Auth::user()->admin > 0)
-                 You have Admin Permissions! Click the Admin Link above for basic CRUD operations. 
-                 @else
-                 You have Normal User Permissions! Click the User Link above for basic user operations.
-                 @endif
-                                              
-                </div>
-            </div>
-        </div>
-    </div>
+ 		<div class="d-md-flex align-items-center h-100 p-5 text-center justify-content-center">
+ 			<div class="px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+ 			
+ 				<br>
+        			<h2 class="font-semibold text-xl text-gray-800 leading-tight">
+           				{{ "Job Postings" }}
+        			</h2>
+        		<br>
+				
+				@php $jobs = DB::table('jobs')->paginate(5) @endphp
+				
+				<!-- Validation Errors -->
+        		<x-auth-validation-errors class="mb-4" :errors="$errors" />
+        	        
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">Job Title</th>
+							<th scope="col">Job Description</th>
+							<th scope="col">Job Requirements</th>
+						</tr>
+					</thead>
+					<tbody>
+					@foreach ($jobs as $job )  
+					@php $id = $job->id @endphp
+    					<tr>
+     	 					<td>{{ $job->title }}</td>
+      						<td>{{ $job->description }}</td>
+      						<td>{{ $job->requirements }}</td>     						
+      				
+      				<form method="GET" action=""> 
+					@csrf
+      						<td><input type="submit" value="View Job Details (NOT IMPLEMENTED)" class="btn btn-primary" /></td>
+      				</form>
+						</tr>    
+			   		
+    				@endforeach		
+    				<tr>{{ $jobs->links() }}</tr>		
+					</tbody>
+				</table> 
+
+			</div>	
+ 		</div>
+        
+	</div>             
+</div>
 </x-app-layout>
