@@ -43,17 +43,29 @@ Route::middleware(['auth'])->group(function () {
                 return view('users.search');
             })->name('admin.search');
             
+            Route::get('job/search', function(){
+                return view('users.jobs.search');
+            })->name('job.search');
+            
             Route::get('admin/show', function(){
-                return view('users.showUsers');
-                
+                return view('users.showUsers');              
             })->name('admin.showUsers');
             
             Route::get('admin/showAllUsers', 'App\Http\Controllers\Admin\UserController@showAllUsers')->name('admin.showAllUsers');
             
+            Route::get('job/showAllJobs', 'App\Http\Controllers\Admin\JobController@showAllJobs')->name('job.showAllJobs');
             
+            Route::get('group/showAllGroups', 'App\Http\Controllers\Groups\GroupController@showAllGroups')->name('group.showAllGroups');
+                        
             Route::post('admin/search', 'App\Http\Controllers\Admin\UserController@search')->name('admin.handleSearch');
             
+            Route::post('job/search', 'App\Http\Controllers\Admin\JobController@search')->name('job.handleSearch');
+            
             Route::resource('admin', 'App\Http\Controllers\Admin\UserController');
+            
+            Route::resource('job', 'App\Http\Controllers\Admin\JobController');   
+            
+            Route::resource('group', 'App\Http\Controllers\Groups\GroupController');
         });       
     
         Route::middleware(['can:accessProfile'])->group(function() {

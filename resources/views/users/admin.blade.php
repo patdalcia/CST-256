@@ -30,6 +30,14 @@ $destroyPath2 = "request()->routeIs('admin.create', '" . Auth::user()->id . "')"
 				</div>
 		@endif	
         
+        <!-- Edit User Information section -->
+        <div>
+        <br>
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+           {{ "Edit Users" }}
+        </h2>
+        <br>
+        
         	<!-- Create New User Link -->       	
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">       
@@ -60,6 +68,82 @@ $destroyPath2 = "request()->routeIs('admin.create', '" . Auth::user()->id . "')"
                 	</div>                 
                 </div>
             </div>
+        </div>
+        
+        <!-- Edit Job Posting section -->        
+        <div>
+        <br>
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+           {{ "Edit Job Postings" }}
+        </h2>
+        <br>
+        
+        <!-- Create New Job Posting Link -->   
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200">       
+                	<div align="center">
+                		<x-responsive-nav-link :href="route('job.create')" :active="request()->routeIs('job.create')">
+                			{{ __('Create New Job Posting') }}
+            			</x-responsive-nav-link>
+                	</div>                 
+                </div>
+            </div>
+            
+         <!-- Show All Job Postings Link -->   
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200">       
+                	<div align="center">
+                		<x-responsive-nav-link :href="route('job.showAllJobs')" :active="request()->routeIs('job.showAllJobs')">
+                			{{ __('Show All Job Postings') }}
+            			</x-responsive-nav-link>
+                	</div>                 
+                </div>
+            </div>
+            <!-- Search Job Posting Link -->   
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200">       
+                	<div align="center">
+                		<x-responsive-nav-link :href="route('job.search')" :active="request()->routeIs('job.search')">
+                			{{ __('Job Posting Search') }}
+            			</x-responsive-nav-link>
+                	</div>                 
+                </div>
+            </div>
+        
+        </div>
+        
+        <!-- Edit User Information section -->
+        <div>
+        <br>
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+           {{ "Edit Groups" }}
+        </h2>
+        <br>
+        
+        	<!-- Create Group Link -->   
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200">       
+                	<div align="center">
+                		<x-responsive-nav-link :href="route('group.create')" :active="request()->routeIs('group.create')">
+                			{{ __('Create New Group') }}
+            			</x-responsive-nav-link>
+                	</div>                 
+                </div>
+            </div>
+            <!-- Show All Groups Link -->   
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200">       
+                	<div align="center">
+                		<x-responsive-nav-link :href="route('group.showAllGroups')" :active="request()->routeIs('group.showAllGroups')">
+                			{{ __('Show All Groups') }}
+            			</x-responsive-nav-link>
+                	</div>                 
+                </div>
+            </div>
+        
+        </div>
+            
+            
         </div>
     </div>
 </x-app-layout>
