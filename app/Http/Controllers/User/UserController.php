@@ -82,6 +82,14 @@ class UserController extends Controller
             $demographics->country = " ";
         }
 
+        if(is_null($portfolio)){
+            $portfolio = new \stdClass();
+            $portfolio->user_id = $user->id;
+            $portfolio->job = " ";
+            $portfolio->skills = " ";
+            $portfolio->professionaleducation = " ";
+        }
+
 
         // attempting to chain with(), if this doesn't work then refactor 
         // compact() to pass several vars as an array

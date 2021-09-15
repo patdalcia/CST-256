@@ -45,18 +45,18 @@ class UserDemographic extends Model
      * checks if the user belongs to a particular group
      * @param string|array $role
      * @return bool
-     
-    public function role($role) {
-        $role = (array)$role;
-        if($this->admin > 0){
-            $r = "admin";
-        }
-        else{
-            $r = "member";
-        }
-        return in_array($r, $role);
-    }
-    */
+     */
+    // public function role($role) {
+    //     $role = (array)$role;
+    //     if($this->admin > 0){
+    //         $r = "admin";
+    //     }
+    //     else{
+    //         $r = "member";
+    //     }
+    //     return in_array($r, $role);
+    // }
+    
     
     /**
      * Get the user that owns the demographic.
