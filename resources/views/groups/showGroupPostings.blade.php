@@ -7,7 +7,7 @@
 	<x-slot name="header">
 		<div align="center">
 			<h2 class="font-semibold text-xl text-gray-800 leading-tight">
-           Displaying All Groups
+           Search Results
         	</h2>
 		</div>
     </x-slot>
@@ -15,31 +15,32 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
         	
-		@component('groups.search')
-			
-		@endcomponent
         
 		<table class="table">
 			<thead>
 				<tr>
+                    {{-- insert group image here? --}}
 					<th scope="col">ID</th>
 					<th scope="col">Group Title</th>
 					<th scope="col">Group Description</th>
 					<th scope="col">Group Rules</th>
 					<th scope="col">Created At</th>
 					<th scope="col">Updated At</th>
+                    {{-- or image here instead? --}}
 				</tr>
 			</thead>
 			<tbody>
 			@foreach ($groups as $group )  
 			@php $id = $group->id @endphp
     			<tr>
+                    {{-- insert group image here?  --}}
 					<th scope="row">{{ $group->id }}</th>
      	 			<td>{{ $group->title }}</td>
       				<td>{{ $group->description }}</td>
       				<td>{{ $group->rules }}</td>
       				<td>{{ $group->created_at }}</td>
       				<td>{{ $group->updated_at }}</td>
+                    {{-- or insert groups image here instead ? --}}
       		<form method="GET" action="{{ route('group.edit', ['group' =>  $id]) }}"> 
 			@csrf
       				<td><input type="submit" value="Edit Group (NOT IMPLEMENTED)" class="btn btn-primary" /></td>
@@ -52,10 +53,8 @@
 				</tr>    
 			   		
     		@endforeach	
-    		<tr>{{ $groups->links() }}</tr>		
 			</tbody>
 		</table>       
 </div>
 </div>
 </x-app-layout>
-

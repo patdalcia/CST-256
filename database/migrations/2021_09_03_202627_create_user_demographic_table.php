@@ -4,8 +4,13 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserDemographicTable extends Migration
+class CreateUserDemographicsTable extends Migration
 {
+    /**
+     * !!! I ran into an issue where this migration would create a "user_demographic" table, when the "user_demographics" (s) 
+     * table was already in use. That one seemed to migrate fine when I cloned the repo, this one did not.
+     */
+    
     /**
      * Run the migrations.
      *
@@ -13,22 +18,17 @@ class CreateUserDemographicTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_demographic', function (Blueprint $table) {
+        Schema::create('user_demographics', function (Blueprint $table) {
             $table->id();
             $table->string('gender', 100);
             $table->integer('age');
             $table->string('education', 100);
             $table->string('interests', 100);
             $table->string('country', 100);
-            // $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
-    /**
-     * !!! I ran into an issue where this migration would create a "user_demographic" table, when the "user_demographics" (s) 
-     * table was already in use. That one seemed to migrate fine when I cloned the repo, this one did not.
-     */
-    
     /**
      * Reverse the migrations.
      *
@@ -36,6 +36,6 @@ class CreateUserDemographicTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_demographic');
+        Schema::dropIfExists('user_demographics');
     }
 }

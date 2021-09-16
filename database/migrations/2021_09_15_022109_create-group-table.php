@@ -18,7 +18,7 @@ class CreateGroupTable extends Migration
             $table->string('title');
             $table->string('description');
             $table->string('rules');
-            $table->string('image_path');
+            $table->string('image_path')->nullable(); //set default to null if no image implemented
             $table->timestamps();
         });
     }

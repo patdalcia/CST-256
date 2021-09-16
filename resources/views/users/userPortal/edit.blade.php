@@ -57,18 +57,23 @@
                 <x-input id="password" class="block mt-1 w-full"
                                 type="password"
                                 name="password"
-                                required autocomplete="new-password"
-                                value="$user->password" />
-            </div>
-
-            <!-- Confirm Password -->
-            <div class="mt-4 mb-4">
-                <x-label for="password_confirmation" :value="__('Confirm Password')" />
-
-                <x-input id="password_confirmation" class="block mt-1 w-full"
-                                type="password"
-                                name="password_confirmation" required
-                                value="$user->password" />
+                                required autocomplete="new-password" />
+                                {{-- value="$user->password"  --}}
+                                {{-- !! Autofilling the password form with the $user->password fills it with what I assume to be the 
+                                    raw hash, which is then hashed again when the form updates - setting your password to something indecipherable --}}
+                                </div>
+                                
+                                <!-- Confirm Password -->
+                                <div class="mt-4 mb-4">
+                                    <x-label for="password_confirmation" :value="__('Confirm Password')" />
+                                    
+                                    <x-input id="password_confirmation" class="block mt-1 w-full"
+                                    type="password"
+                                    name="password_confirmation" 
+                                    required />
+                                    {{-- value="$user->password"  --}}
+                                    {{-- !! Autofilling the password form with the $user->password fills it with what I assume to be the 
+                                        raw hash, which is then hashed again when the form updates - setting your password to something indecipherable --}}
             </div>
             
             <h1><strong>Edit Demographic Information</strong></h1>

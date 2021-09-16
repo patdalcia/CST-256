@@ -61,6 +61,12 @@ Route::middleware(['auth'])->group(function () {
             
             Route::post('job/search', 'App\Http\Controllers\Admin\JobController@search')->name('job.handleSearch');
             
+            Route::get('group/search', function () {
+                return view('groups.search');
+            })->name('groups.search');
+
+            Route::post('group/search', 'App\Http\Controllers\Groups\GroupController@search')->name('group.handleSearch');  // what name
+
             Route::resource('admin', 'App\Http\Controllers\Admin\UserController');
             
             Route::resource('job', 'App\Http\Controllers\Admin\JobController');   

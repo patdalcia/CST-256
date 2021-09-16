@@ -107,4 +107,26 @@ class GroupController extends Controller
             'groups' => DB::table('groups')->paginate(10)
         ]);
     }
+
+    /**
+     * Handles user search information 
+     * Returns a view displaying the group results cards, if any. 
+     * View is similar to showAllGroups view
+     * 
+     * @param Request
+     * @return view
+     */
+    public function search(Request $request){
+        $key = trim($request->get('search'));
+
+        $groups = Group::query()
+        ->where('id', 'like', "%{$key}%")
+        ->orWhere('title', 'like', "%{$key}%")
+        ->orWhere('description', 'like', "%{$key}%")
+        ->orWhere('rules', 'like', "%{$key}%")
+        ->orderBy('id', 'asc')
+        ->get();
+
+        return view('groups.showGroupPostings')->with('groups', $groups);
+    }
 }
