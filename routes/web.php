@@ -34,6 +34,8 @@ Route::middleware(['auth'])->group(function () {
         return view('dashboard');
     })->name('dashboard');
     
+    Route::get('group/{group}/join', 'App\Http\Controllers\Groups\joinGroupController@join')->name('group.join');
+    
     Route::middleware(['can:accessAdminpanel'])->group(function() { 
         Route::get('/admin/operations', function(){
             return view('users.admin')->name('adminOperations');
@@ -61,11 +63,11 @@ Route::middleware(['auth'])->group(function () {
             
             Route::post('job/search', 'App\Http\Controllers\Admin\JobController@search')->name('job.handleSearch');
             
+            Route::post('group/search', 'App\Http\Controllers\Groups\GroupController@search')->name('group.handleSearch');  // what name
+            
             Route::get('group/search', function () {
                 return view('groups.search');
-            })->name('groups.search');
-
-            Route::post('group/search', 'App\Http\Controllers\Groups\GroupController@search')->name('group.handleSearch');  // what name
+            })->name('groups.search');           
 
             Route::resource('admin', 'App\Http\Controllers\Admin\UserController');
             
@@ -79,6 +81,10 @@ Route::middleware(['auth'])->group(function () {
             Route::resource('user', 'App\Http\Controllers\User\UserController');
             
             Route::get('user/showAllPosts', 'App\Http\Controllers\User\UserController@showAllPosts')->name('user.showAllPosts');
+            
+            
+            
+            
                         
         });
 });

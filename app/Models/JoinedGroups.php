@@ -2,16 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
 
-class Job extends Model
+class JoinedGroups extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasFactory;
     
     /**
      * The attributes that are mass assignable.
@@ -19,10 +15,8 @@ class Job extends Model
      * @var string[]
      */
     protected $fillable = [
-        'title',
-        'description',
-        'requirements',
-        'user_id'
+        'user_id',
+        'group_id',
     ];
     
     /**
@@ -43,7 +37,7 @@ class Job extends Model
     ];
     
     /**
-     * Get the post that owns the comment.
+     * 
      */
     public function user()
     {

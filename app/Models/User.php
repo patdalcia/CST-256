@@ -77,4 +77,21 @@ class User extends Authenticatable
     public function userPortfolio(){
         return $this->hasOne(UserPortfolio::class);
     }
+    
+    /**
+     * Get the Portfolio associated with the user
+     *
+     * @return UserPortfolio
+     */
+    public function job(){
+        return $this->hasMany(Job::class);
+    }
+    
+    /**
+     * Get the Demographics associated with the user.
+     */
+    public function joinedGroups()
+    {
+        return $this->hasMany(JoinedGroups::class);
+    }
 }

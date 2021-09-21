@@ -7,7 +7,7 @@
 	<x-slot name="header">
 		<div align="center">
 			<h2 class="font-semibold text-xl text-gray-800 leading-tight">
-           Displaying All Jobs
+           Displaying Selected Job
         	</h2>
 		</div>
     </x-slot>
@@ -15,28 +15,53 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
         	
-        
 		<table class="table">
 			<thead>
 				<tr>
-					<th scope="col">ID</th>
-					<th scope="col">Job Title</th>
-					<th scope="col">Job Description</th>
-					<th scope="col">Job Requirements</th>
-					<th scope="col">Created At</th>
-					<th scope="col">Updated At</th>
+					<th scope="col">ID</th>																									
+				</tr>
+				<tr>
+					<th scope="row">{{ $job->id }}</th>
+				</tr>
+				<tr>
+					<th scope="col">Job Title</th>					
+				</tr>
+				<tr>
+					<td>{{ $job->title }}</td>
+				</tr>
+				<tr>
+					<th scope="col">Job Description</th>				
+				</tr>
+				<tr>
+					<td>{{ $job->description }}</td>
+				</tr>
+				<tr>
+					<th scope="col">Job Requirements</th>				
+				</tr>
+				<tr>
+					<td>{{ $job->requirements }}</td>
+				</tr>
+				<tr>
+					<th scope="col">Created At</th>				
+				</tr>
+				<tr>
+					<td>{{ $job->created_at }}</td>
+				</tr>
+				<tr>
+					<th scope="col">Updated At</th>				
+				</tr>
+				<tr>
+					<td>{{ $job->updated_at }}</td>
 				</tr>
 			</thead>
 			<tbody>
-			@foreach ($jobs as $job )  
+			
 			@php $id = $job->id @endphp
     			<tr>
 					<th scope="row">{{ $job->id }}</th>
-     	 			<td>{{ $job->title }}</td>
-      				<td>{{ $job->description }}</td>
-      				<td>{{ $job->requirements }}</td>
-      				<td>{{ $job->created_at }}</td>
-      				<td>{{ $job->updated_at }}</td>
+     	 			<td>{{ $job->title }}</td>      				     				
+      				
+      				
       		<form method="GET" action="{{ route('job.show', ['job' =>  $id]) }}"> 
 			@csrf
       				<td><input type="submit" value="Learn More?" class="btn btn-primary" /></td>
@@ -51,10 +76,7 @@
 			@method('DELETE')
       				<td><input type="submit" value="Delete Job Posting" class="btn btn-danger" onclick="return confirm('WARNING: Selecting Yes will delete the Job Posting from the database. This action is FINAL')"/></td>
       		</form>
-				</tr>    
-			   		
-    		@endforeach	
-    		<tr>{{ $jobs->links() }}</tr>		
+				</tr>    		
 			</tbody>
 		</table>       
 </div>

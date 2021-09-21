@@ -15,9 +15,11 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
         	
+         
 		@component('groups.search')
 			
 		@endcomponent
+		
         
 		<table class="table">
 			<thead>
@@ -40,6 +42,7 @@
       				<td>{{ $group->rules }}</td>
       				<td>{{ $group->created_at }}</td>
       				<td>{{ $group->updated_at }}</td>
+      	@if(Auth::user()->admin > 0)
       		<form method="GET" action="{{ route('group.edit', ['group' =>  $id]) }}"> 
 			@csrf
       				<td><input type="submit" value="Edit Group (NOT IMPLEMENTED)" class="btn btn-primary" /></td>
@@ -48,6 +51,11 @@
 			@csrf
 			@method('DELETE')
       				<td><input type="submit" value="Delete Group" class="btn btn-danger" onclick="return confirm('WARNING: Selecting Yes will delete the Group from the database. This action is FINAL')"/></td>
+      		</form>
+      	@endif
+      		<form method="GET" action="{{ route('group.join', ['group' =>  $id]) }}"> 
+			@csrf
+      				<td><input type="submit" value="Join Group" class="btn btn-primary" /></td>
       		</form>
 				</tr>    
 			   		

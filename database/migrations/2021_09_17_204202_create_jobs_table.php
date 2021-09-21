@@ -18,11 +18,11 @@ class CreateJobsTable extends Migration
             $table->string('title');
             $table->string('description');
             $table->string('requirements');
-            // $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
-
+    
     /**
      * Reverse the migrations.
      *

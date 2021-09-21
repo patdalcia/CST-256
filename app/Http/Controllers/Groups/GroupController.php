@@ -7,6 +7,7 @@ use App\Models\Group;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\View;
 
 class GroupController extends Controller
 {

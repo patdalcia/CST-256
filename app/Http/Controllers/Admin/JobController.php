@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Job;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
@@ -47,10 +48,13 @@ class JobController extends Controller
             'requirements' => 'required|string|max:255'
         ]);
         
+      
+        
         $job = Job::create([
             'title' => $request->title,
             'description' => $request->description,
-            'requirements' => $request->requirements
+            'requirements' => $request->requirements,
+            'user_id' => Auth::User()->id
         ]);
         
         event(new Registered($job));
@@ -67,9 +71,10 @@ class JobController extends Controller
      * @param  \App\Models\Job  $job
      * @return \Illuminate\Http\Response
      */
-    public function show(Job $job)
+    public function show($job)
     {
-        echo "TESTING";
+        $job = Job::find($job);
+        return view('users.jobs.showJob')->with('job', $job);
     }
 
     /**
