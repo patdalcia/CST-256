@@ -56,7 +56,7 @@ $user = Auth::user();
         			</h2>
         		<br>
 				
-				@php $jobs = DB::table('jobs')->paginate(5) @endphp
+				@php $jobs = DB::table('jobs')->get() @endphp
 				
 				<!-- Validation Errors -->
         		<x-auth-validation-errors class="mb-4" :errors="$errors" />
@@ -83,8 +83,7 @@ $user = Auth::user();
       				</form>
 						</tr>    
 			   		
-    				@endforeach		
-    				<tr>{{ $jobs->links() }}</tr>		
+    				@endforeach			
 					</tbody>
 				</table> 
 

@@ -26,7 +26,15 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
-
+/*
+ * API routes
+ */
+Route::get('api/job', 'App\Http\Controllers\RestController@getAllJobs');
+Route::get('api/job/{id}', 'App\Http\Controllers\RestController@getJob');
+Route::get('api/user','App\Http\Controllers\RestController@getAllUsers');
+Route::get('api/user/{id}','App\Http\Controllers\RestController@getUser');
+Route::get('api/group', 'App\Http\Controllers\RestController@getAllGroups');
+Route::get('api/group/{id}', 'App\Http\Controllers\RestController@getGroup');
 
 Route::middleware(['auth'])->group(function () {
     
@@ -89,8 +97,3 @@ Route::middleware(['auth'])->group(function () {
         });
 });
 
-/*
-Route::get('/admin-dashboard', function(){
-    return view('users.admin');
-});
-*/
