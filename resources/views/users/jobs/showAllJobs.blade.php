@@ -16,47 +16,9 @@
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
         	
         
-		<table class="table">
-			<thead>
-				<tr>
-					<th scope="col">ID</th>
-					<th scope="col">Job Title</th>
-					<th scope="col">Job Description</th>
-					<th scope="col">Job Requirements</th>
-					<th scope="col">Created At</th>
-					<th scope="col">Updated At</th>
-				</tr>
-			</thead>
-			<tbody>
-			@foreach ($jobs as $job )  
-			@php $id = $job->id @endphp
-    			<tr>
-					<th scope="row">{{ $job->id }}</th>
-     	 			<td>{{ $job->title }}</td>
-      				<td>{{ $job->description }}</td>
-      				<td>{{ $job->requirements }}</td>
-      				<td>{{ $job->created_at }}</td>
-      				<td>{{ $job->updated_at }}</td>
-      		<form method="GET" action="{{ route('job.show', ['job' =>  $id]) }}"> 
-			@csrf
-      				<td><input type="submit" value="Learn More?" class="btn btn-primary" /></td>
-      		</form>		
-      		
-      		<form method="GET" action="{{ route('job.edit', ['job' =>  $id]) }}"> 
-			@csrf
-      				<td><input type="submit" value="Edit Job Posting" class="btn btn-primary" /></td>
-      		</form>
-      		<form method="POST" action="{{ route('job.destroy', ['job' =>  $id]) }}"> 
-			@csrf
-			@method('DELETE')
-      				<td><input type="submit" value="Delete Job Posting" class="btn btn-danger" onclick="return confirm('WARNING: Selecting Yes will delete the Job Posting from the database. This action is FINAL')"/></td>
-      		</form>
-				</tr>    
-			   		
-    		@endforeach	
-    		<tr>{{ $jobs->links() }}</tr>		
-			</tbody>
-		</table>       
+		@foreach($jobs as $job)
+		<x-card :data="$job"/>
+		@endforeach       
 </div>
 </div>
 </x-app-layout>

@@ -10,6 +10,7 @@ $user = Auth::user();
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" ></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js" ></script>
+<link rel="stylesheet" href="public/css/card.styles.css">
 
 <x-app-layout>
     <x-slot name="header">
@@ -31,8 +32,7 @@ $user = Auth::user();
 				</div>
 		@endif
         
-	<div class="d-flex h-md-100 justify-content-around">	
-	
+	<div class="d-flex h-md-100 justify-content-around">			
 		<div class="d-md-flex align-items-center h-100 p-5 text-center justify-content-center">
 			<div class="mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
 				Welcome {{ $user->firstname }} {{ $user->lastname }}, you're logged in!

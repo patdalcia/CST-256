@@ -58,15 +58,14 @@
 			
 			@php $id = $job->id @endphp
     			<tr>
-					<th scope="row">{{ $job->id }}</th>
-     	 			<td>{{ $job->title }}</td>      				     				
+		 				     				
       				
       				
-      		<form method="GET" action="{{ route('job.show', ['job' =>  $id]) }}"> 
+      		<form method="GET" action="#"> 
 			@csrf
-      				<td><input type="submit" value="Learn More?" class="btn btn-primary" /></td>
+      				<td><input type="submit" value="Apply? (NOT IMPLEMENTED)" class="btn btn-primary" /></td>
       		</form>		
-      		
+      		@if(Auth::user()->admin == 1)
       		<form method="GET" action="{{ route('job.edit', ['job' =>  $id]) }}"> 
 			@csrf
       				<td><input type="submit" value="Edit Job Posting" class="btn btn-primary" /></td>
@@ -76,6 +75,7 @@
 			@method('DELETE')
       				<td><input type="submit" value="Delete Job Posting" class="btn btn-danger" onclick="return confirm('WARNING: Selecting Yes will delete the Job Posting from the database. This action is FINAL')"/></td>
       		</form>
+      		@endif
 				</tr>    		
 			</tbody>
 		</table>       

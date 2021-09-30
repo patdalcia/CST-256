@@ -16,9 +16,12 @@ use PHPUnit\TextUI\XmlConfiguration\Group;
 
 Route::get('/', function () {
     return view('welcome');
+    
+Route::get('/loggingService', 'App\Http\Controllers\LoggingController@index');
+    
 })->name('/');
     Route::get('/test', function () {
-        return view('test');
+        return view('components.card');
     });
 /*
 Route::get('/dashboard', function () {
@@ -39,6 +42,9 @@ Route::get('api/group', 'App\Http\Controllers\RestController@getAllGroups');
 Route::get('api/group/{id}', 'App\Http\Controllers\RestController@getGroup');
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('job/showAllJobs', 'App\Http\Controllers\Admin\JobController@showAllJobs')->name('job.showAllJobs');
+    
+    Route::resource('job', 'App\Http\Controllers\Admin\JobController');  
     
     Route::get('/dashboard', function () {
         return view('dashboard');
@@ -63,9 +69,7 @@ Route::middleware(['auth'])->group(function () {
                 return view('users.showUsers');              
             })->name('admin.showUsers');
             
-            Route::get('admin/showAllUsers', 'App\Http\Controllers\Admin\UserController@showAllUsers')->name('admin.showAllUsers');
-            
-            Route::get('job/showAllJobs', 'App\Http\Controllers\Admin\JobController@showAllJobs')->name('job.showAllJobs');
+            Route::get('admin/showAllUsers', 'App\Http\Controllers\Admin\UserController@showAllUsers')->name('admin.showAllUsers');           
             
             Route::get('group/showAllGroups', 'App\Http\Controllers\Groups\GroupController@showAllGroups')->name('group.showAllGroups');
                         
@@ -79,9 +83,7 @@ Route::middleware(['auth'])->group(function () {
                 return view('groups.search');
             })->name('groups.search');           
 
-            Route::resource('admin', 'App\Http\Controllers\Admin\UserController');
-            
-            Route::resource('job', 'App\Http\Controllers\Admin\JobController');   
+            Route::resource('admin', 'App\Http\Controllers\Admin\UserController');            
             
             Route::resource('group', 'App\Http\Controllers\Groups\GroupController');
         });       

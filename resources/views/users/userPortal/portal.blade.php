@@ -83,6 +83,16 @@ $demographics = User::findOrFail($user->id)->userDemographic;
                 	</div>                 
                 </div>
             </div>
+            <!-- View All Jobs -->   
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200">       
+                	<div align="center">
+                		<x-responsive-nav-link :href="route('job.showAllJobs')" :active="request()->routeIs('job.showAllJobs')">
+                			{{ __('View All Jobs') }}
+            			</x-responsive-nav-link>
+                	</div>                 
+                </div>
+            </div>
         </div>
     </div>
 </x-app-layout>
