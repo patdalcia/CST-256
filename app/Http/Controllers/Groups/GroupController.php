@@ -61,9 +61,10 @@ class GroupController extends Controller
      * @param  \App\Models\Group  $group
      * @return \Illuminate\Http\Response
      */
-    public function show(Group $group)
+    public function show($group)
     {
-        //
+        $g = Group::findorfail($group);
+        return view('groups.showGroupPostings')->with('group', $g);
     }
 
     /**

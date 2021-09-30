@@ -77,9 +77,9 @@ $user = Auth::user();
       						<td>{{ $job->description }}</td>
       						<td>{{ $job->requirements }}</td>     						
       				
-      				<form method="GET" action=""> 
+      				<form method="GET" action="{{ route('job.show', ['job' => $id]) }}"> 
 					@csrf
-      						<td><input type="submit" value="View Job Details (NOT IMPLEMENTED)" class="btn btn-primary" /></td>
+      						<td><input type="submit" value="View Job Details" class="btn btn-primary" /></td>
       				</form>
 						</tr>    
 			   		
@@ -122,7 +122,7 @@ $user = Auth::user();
       				
       				<form method="GET" action="{{ route('group.join', ['group' =>  $id]) }}"> 
 					@csrf
-      						<td><input type="submit" value="Join Group (NOT IMPLEMENTED)" class="btn btn-primary" /></td>
+      						<td><input type="submit" value="Join Group" class="btn btn-primary" /></td>
       				</form>
 						</tr>    
 			   		
@@ -175,9 +175,9 @@ $user = Auth::user();
       						<td>{{ $g->description }}</td>
       						<td>{{ $g->rules }}</td>     						
       				
-      				<form method="GET" action=""> 
+      				<form method="GET" action="{{ route('group.show', ['group' => $id]) }}"> 
 					@csrf
-      						<td><input type="submit" value="View Group Details (NOT IMPLEMENTED)" class="btn btn-primary" /></td>
+      						<td><input type="submit" value="View Group Details" class="btn btn-primary" /></td>
       				</form>
 						</tr>    
 			   		

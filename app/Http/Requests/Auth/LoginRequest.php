@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Log;
 
 class LoginRequest extends FormRequest
 {
@@ -43,10 +44,12 @@ class LoginRequest extends FormRequest
      */
     public function authenticate()
     {
+        Log::info("Entering LoginRequest@authenticate() method");
         $this->ensureIsNotRateLimited();
 
         if (! Auth::attempt($this->only('username', 'password'), $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
+            Log::error("Rate Limiter Hit in LoginRequest@authenticate()");
 
             throw ValidationException::withMessages([
                 'username' => __('auth.failed'),

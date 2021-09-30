@@ -51,6 +51,7 @@ Route::middleware(['auth'])->group(function () {
     })->name('dashboard');
     
     Route::get('group/{group}/join', 'App\Http\Controllers\Groups\joinGroupController@join')->name('group.join');
+    Route::resource('group', 'App\Http\Controllers\Groups\GroupController');
     
     Route::middleware(['can:accessAdminpanel'])->group(function() { 
         Route::get('/admin/operations', function(){
@@ -83,9 +84,7 @@ Route::middleware(['auth'])->group(function () {
                 return view('groups.search');
             })->name('groups.search');           
 
-            Route::resource('admin', 'App\Http\Controllers\Admin\UserController');            
-            
-            Route::resource('group', 'App\Http\Controllers\Groups\GroupController');
+            Route::resource('admin', 'App\Http\Controllers\Admin\UserController');                       
         });       
     
         Route::middleware(['can:accessProfile'])->group(function() {

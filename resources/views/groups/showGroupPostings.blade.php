@@ -33,7 +33,7 @@
 				</tr>
 			</thead>
 			<tbody>
-			@foreach ($groups as $group )  
+			
 			@php $id = $group->id @endphp
     			<tr>
                     {{-- insert group image here?  --}}
@@ -44,6 +44,8 @@
       				<td>{{ $group->created_at }}</td>
       				<td>{{ $group->updated_at }}</td>
                     {{-- or insert groups image here instead ? --}}
+                    
+            @if(Auth::user()->admin == 1)
       		<form method="GET" action="{{ route('group.edit', ['group' =>  $id]) }}"> 
 			@csrf
       				<td><input type="submit" value="Edit Group (NOT IMPLEMENTED)" class="btn btn-primary" /></td>
@@ -53,9 +55,9 @@
 			@method('DELETE')
       				<td><input type="submit" value="Delete Group" class="btn btn-danger" onclick="return confirm('WARNING: Selecting Yes will delete the Group from the database. This action is FINAL')"/></td>
       		</form>
+      		@endif
 				</tr>    
 			   		
-    		@endforeach	
 			</tbody>
 		</table>       
 </div>

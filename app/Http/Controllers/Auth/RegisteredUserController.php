@@ -9,6 +9,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rules;
 
 class RegisteredUserController extends Controller
@@ -20,6 +21,7 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
+        Log::info("Inside RegisteredUserController@create()");
         return view('auth.register');
     }
 
@@ -33,6 +35,7 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
+        Log::info("Inside RegisteredUserController@store()");
         $request->validate([
             'username' => 'required|string|max:255',
             'firstname' => 'required|string|max:255',
@@ -40,7 +43,7 @@ class RegisteredUserController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
-
+        Log::info("Validation successful inside of RegisteredUserController@store(). Creating new User");
         $user = User::create([
             'username' => $request->username,
             'firstname' => $request->firstname,
@@ -52,7 +55,7 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
-
+        
         return redirect(RouteServiceProvider::HOME);
     }
 }
