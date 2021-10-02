@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\UserPortfolio;
+use App\Models\Job;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class UserPortfolioFactory extends Factory
+class JobFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = UserPortfolio::class;
+    protected $model = Job::class;
 
     /**
      * Define the model's default state.
@@ -22,9 +22,10 @@ class UserPortfolioFactory extends Factory
     public function definition()
     {
         return [
-            'job' => $this->faker->jobTitle(),
-            'skills' => 'Fast Learner',
-            'professionaleducation' => 'Intern',
+            'title' => $this->faker->jobTitle(),
+            'description' => $this->faker->text(100),
+            'requirements' => "Have a pulse",
+            'user_id'
         ];
     }
 }

@@ -13,7 +13,7 @@ class CreateJoinedGroupsTable extends Migration
      */
     public function up()
     {
-        Schema::create('joined-groups', function (Blueprint $table) {
+        Schema::create('joined_groups', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('group_id')->constrained('groups')->onUpdate('cascade')->onDelete('cascade');
@@ -28,6 +28,6 @@ class CreateJoinedGroupsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('joined-groups');
+        Schema::dropIfExists('joined_groups');
     }
 }
