@@ -22,7 +22,12 @@ class GroupFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'title' => $this->faker->jobTitle(),
+            'description' => $this->faker->text(100),
+            'rules' => "Don't be mean",
+            'image_path' => '',
+            'created_at' => now(),
+            'updated_at' => now()
         ];
     }
 }
