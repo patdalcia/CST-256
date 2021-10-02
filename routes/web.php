@@ -40,6 +40,9 @@ Route::get('api/user','App\Http\Controllers\RestController@getAllUsers');
 Route::get('api/user/{id}','App\Http\Controllers\RestController@getUser');
 Route::get('api/group', 'App\Http\Controllers\RestController@getAllGroups');
 Route::get('api/group/{id}', 'App\Http\Controllers\RestController@getGroup');
+/*
+ * END API Routes
+ */
 
 Route::middleware(['auth'])->group(function () {
     Route::get('job/showAllJobs', 'App\Http\Controllers\Admin\JobController@showAllJobs')->name('job.showAllJobs');
