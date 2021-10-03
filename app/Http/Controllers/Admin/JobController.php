@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
 class JobController extends Controller
@@ -19,6 +20,7 @@ class JobController extends Controller
      */
     public function index()
     {
+        Log::info("Inside JobController@index");
         return view('users.jobs.showAllJobs', [
             'jobs' => DB::table('jobs')->paginate(10)
         ]);
@@ -31,6 +33,7 @@ class JobController extends Controller
      */
     public function create()
     {
+        Log::info("Inside UserController@create");
         return view('users.jobs.create');
     }
 
@@ -42,6 +45,7 @@ class JobController extends Controller
      */
     public function store(Request $request)
     {
+        Log::info("Inside UserController@store");
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string|max:400',
@@ -73,6 +77,7 @@ class JobController extends Controller
      */
     public function show($job)
     {
+        Log::info("Inside UserController@show");
         $job = Job::find($job);
         return view('users.jobs.showJob')->with('job', $job);
     }
@@ -90,7 +95,7 @@ class JobController extends Controller
      */
     
     public function search(Request $request){
-        
+        Log::info("Inside UserController@search");
         $key = trim($request->get('search'));
         
         $jobs = Job::query()
@@ -106,6 +111,7 @@ class JobController extends Controller
         
     public function edit($job)
     {
+        Log::info("Inside UserController@edit");
         $key = (int)$job;
         
         $job = Job::find($key);
@@ -121,6 +127,7 @@ class JobController extends Controller
      */
     public function update(Request $request, $job)
     {
+        Log::info("Inside UserController@update");
         $job = Job::findOrFail($job);
         
         $request->validate([
@@ -150,6 +157,7 @@ class JobController extends Controller
      */
     public function destroy($job)
     {
+        Log::info("Inside UserController@destroy");
         $job = Job::findOrFail($job);
         $flag = $job->delete();
         
@@ -165,6 +173,7 @@ class JobController extends Controller
      * Returns a view showing all users in database
      */
     public function showAllJobs(){
+        Log::info("Inside UserController@showAllJobs");
         return view('users.jobs.showAllJobs', [
             'jobs' => DB::table('jobs')->paginate(10)
         ]);

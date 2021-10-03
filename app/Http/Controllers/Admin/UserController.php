@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use App\Providers\RouteServiceProvider;
@@ -21,6 +22,7 @@ class UserController extends Controller
      */
     public function index()
     {
+        Log::info("Inside UserController@index");
         return view('users.admin');
     }
     
@@ -42,6 +44,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        Log::info("Inside UserController@store");
         $request->validate([
             'username' => 'required|string|max:255',
             'firstname' => 'required|string|max:255',
@@ -49,7 +52,7 @@ class UserController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
-        
+        Log::info("Attempting to create new User...");
         $user = User::create([
             'username' => $request->username,
             'firstname' => $request->firstname,
@@ -57,7 +60,7 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-        
+        Log::info("New User has been created!");
         event(new Registered($user));
         
         Session::flash('status', 'User Has Been ');
@@ -156,13 +159,17 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        Log::info("Inside UserController@destroy");
         $user = User::findOrFail($id);
+        Log::info("Attempting to delete user...");
         $flag = $user->delete();
         
         if($flag == true){
+            Log::info("User has been deleted!");
             return redirect()->route( 'admin.index' )->with('status', 'User Has Been Deleted Successfully!');
         }
         else{
+            Log::info("Failed to delete user!");
             return redirect()->route( 'admin.index' )->with('status', 'ERROR: User Has Not Been Deleted Successfully!');
         }
     }

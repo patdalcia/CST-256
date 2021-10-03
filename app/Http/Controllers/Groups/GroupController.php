@@ -7,6 +7,7 @@ use App\Models\Group;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\View;
 
 class GroupController extends Controller
@@ -28,6 +29,7 @@ class GroupController extends Controller
      */
     public function create()
     {
+        Log::info("Inside GroupController@create");
         return view('groups.create');
     }
 
@@ -39,7 +41,7 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
-        
+        Log::info("Inside GroupController@store");
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string|max:255',
@@ -63,6 +65,7 @@ class GroupController extends Controller
      */
     public function show($group)
     {
+        Log::info("Inside GroupController@show");
         $g = Group::findorfail($group);
         return view('groups.showGroupPostings')->with('group', $g);
     }
@@ -105,6 +108,7 @@ class GroupController extends Controller
      * Returns a view showing all groups in database
      */
     public function showAllGroups(){
+        Log::info("Inside GroupController@showAllGroups");
         return view('groups.showAllGroups', [
             'groups' => DB::table('groups')->paginate(10)
         ]);
@@ -119,6 +123,7 @@ class GroupController extends Controller
      * @return view
      */
     public function search(Request $request){
+        Log::info("Inside GroupController@search");
         $key = trim($request->get('search'));
 
         $groups = Group::query()

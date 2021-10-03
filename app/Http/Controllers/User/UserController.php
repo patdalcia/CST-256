@@ -8,6 +8,7 @@ use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use App\Providers\RouteServiceProvider;
@@ -26,6 +27,7 @@ class UserController extends Controller
      */
     public function index()
     {
+        Log::info("Inside UserController@index");
         return view('users.userPortal.portal');
     }
 
@@ -36,6 +38,7 @@ class UserController extends Controller
      */
     public function create()
     {
+        Log::info("Inside UserController@create");
         return view('users.userPortal.createPost');
     }
 
@@ -69,6 +72,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        Log::info("Inside UserController@edit");
         $user = User::find($id);
         $demographics = User::find($id)->userDemographic;
         $portfolio = User::find($id)->userPortfolio;
@@ -108,6 +112,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        Log::info("Inside UserController@update");
         $user = User::findOrFail($id);
         $demographics = User::findOrFail($id)->userDemographic;
         $portfolio = User::findOrFail($id)->userPortfolio;
